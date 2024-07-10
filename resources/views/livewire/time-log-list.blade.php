@@ -41,10 +41,9 @@
                     </td>
                     <td class="px-6 py-4 text-right">
                         @if (!$timeLog->duration)
-                            <x-secondary-button type="button" wire:click='stopTimer({{$timeLog}})'>Stop</x-secondary-button>
-                        @else
-                            <x-secondary-button type="button" class="cursor-not-allowed" title="Coming soon..." disabled>Edit</x-secondary-button>
+                            <x-danger-button type="button" wire:click.prevent='stopTimer({{$timeLog}})'>Stop</x-danger-button>
                         @endif
+                        <x-secondary-button type="button" wire:click.prevent="editLog({{$timeLog}})">Edit</x-secondary-button>
                     </td>
                 </tr>
             @endforeach
@@ -55,6 +54,10 @@
             </tr>
         </tfoot>
     </table>
+
+    @if ($editTimeLog)
+        <livewire:time-log-edit :timeLog="$editTimeLog"/>
+    @endif
 </div>
 
 <script>

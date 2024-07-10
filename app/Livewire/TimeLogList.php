@@ -2,15 +2,16 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
-use App\Models\TimeLog;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\Attributes\On;
 use Illuminate\Support\Carbon;
+use App\Models\{TimeLog, User};
+use Livewire\{Component, WithPagination};
 
 class TimeLogList extends Component
 {
     use WithPagination;
+
+    public ?TimeLog $editTimeLog = null;
 
     public function render()
     {
@@ -34,8 +35,17 @@ class TimeLogList extends Component
         $timeLog->duration = $duration;
         $timeLog->save();
 
-        session(null)->flash('success', 'Timer Stopped.');
+        $this->dispatch('session-flash', type: 'success', message: 'Timer Stopped.');
+    }
 
-        return $this->redirectIntended('/dashboard', true);
+    #[On('close-log-edit')]
+    public function cancelEditLog()
+    {
+        $this->editTimeLog = null;
+    }
+
+    public function editLog(?TimeLog $timeLog)
+    {
+        $this->editTimeLog = $timeLog;
     }
 }

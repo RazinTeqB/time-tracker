@@ -10,7 +10,7 @@ class TimeLog extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $protected = [
+    protected $guarded = [
         'id',
     ];
 
