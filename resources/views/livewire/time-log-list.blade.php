@@ -22,10 +22,7 @@
         <tbody>
             @foreach ($timeLogs as $timeLog)
                 <tr
-                    class="
-                        bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600
-                        @if (!$timeLog->duration) border-black border-bottom dark:border-white @endif
-                    "
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 @if (!$timeLog->duration) border-black border-bottom dark:border-white @endif"
                 >
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $timeLog->title ?? '-' }}
@@ -34,20 +31,22 @@
                         @endif
 
                     </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-nowrap">
                         {{ $timeLog->started_at ?? '-' }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-nowrap">
                         {{ $timeLog->ended_at ?? '-' }}
                     </td>
                     <td class="px-6 py-4">
                         <livewire:countdown-timer key="{{ $timeLog->id }}_duration_{{$timeLog->duration ?? 0}}" id="$timeLog->id" :timeLog="$timeLog">
                     </td>
                     <td class="px-6 py-4 text-right">
-                        @if (!$timeLog->duration)
-                            <x-danger-button type="button" wire:click.prevent='stopTimer({{$timeLog}})'>Stop</x-danger-button>
-                        @endif
-                        <x-secondary-button type="button" wire:click.prevent="editLog({{$timeLog}})">Edit</x-secondary-button>
+                        <div class="flex gap-3 justify-end items-center">
+                            @if (!$timeLog->duration)
+                                <x-danger-button type="button" wire:click.prevent='stopTimer({{$timeLog}})'>Stop</x-danger-button>
+                            @endif
+                            <x-secondary-button type="button" wire:click.prevent="editLog({{$timeLog}})">Edit</x-secondary-button>
+                        </div>
                     </td>
                 </tr>
             @endforeach
