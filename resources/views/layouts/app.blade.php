@@ -15,7 +15,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div
+            class="min-h-screen bg-gray-100 dark:bg-gray-900"
+            x-data="{
+                show_info: false,
+                show_danger: false,
+                show_success: false,
+                show_warning: false,
+            }"
+        >
             <livewire:layout.navigation />
 
             <!-- Page Heading -->
@@ -27,31 +35,12 @@
                 </header>
             @endif
 
-            @if (session('info'))
-                <div
-                    x-data="{ show_info: true }" x-show="show_info" x-init="setTimeout(() => show_info = false, 3000)"
-                    class="mt-4 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert"
-                >{{ session('info') }}</div>
-            @endif
-            @if (session('danger'))
-                <div
-                    x-data="{ show_danger: true }" x-show="show_danger" x-init="setTimeout(() => show_danger = false, 3000)"
-                    class="mt-4 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert"
-                >{{ session('danger') }}</div>
-            @endif
-            @if (session('success'))
-                <div
-                    x-data="{ show_success: true }" x-show="show_success" x-init="setTimeout(() => show_success = false, 3000)"
-                    class="mt-4 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert"
-                >{{ session('success') }}</div>
-            @endif
-            @if (session('warning'))
-                <div
-                    x-data="{ show_warning: true }" x-show="show_warning" x-init="setTimeout(() => show_warning = false, 3000)"
-                    class="mt-4 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert"
-                >{{ session('warning') }}</div>
-            @endif
-
+            <div class="fixed top-0 inset-x-0 z-50 px-8">
+                <x-alert type='info'/>
+                <x-alert type='danger'/>
+                <x-alert type='success'/>
+                <x-alert type='warning'/>
+            </div>
 
             <!-- Page Content -->
             <main>
