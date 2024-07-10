@@ -29,6 +29,10 @@
                 >
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $timeLog->title ?? '-' }}
+                        @if ($timeLog->description)
+                            <div class="block mt-2 max-w-lg text-wrap">{{ $timeLog->description }}</div>
+                        @endif
+
                     </th>
                     <td class="px-6 py-4">
                         {{ $timeLog->started_at ?? '-' }}
