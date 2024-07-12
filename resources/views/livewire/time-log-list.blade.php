@@ -29,7 +29,16 @@
                         @if ($timeLog->description)
                             <div class="block mt-2 max-w-lg text-wrap">{{ $timeLog->description }}</div>
                         @endif
-
+                        @if ($timeLog->tags && count($timeLog->tags) > 0)
+                            <div class="mt-2">
+                                @foreach ($timeLog->tags as $tag)
+                                    <span
+                                        class="inline-block mt-2 bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                                        style="@if($tag->color) background-color: {{$tag->color}} !important; @endif"
+                                    >{{ $tag->name }}</span>
+                                @endforeach
+                            </div>
+                        @endif
                     </th>
                     <td class="px-6 py-4 text-nowrap">
                         {{ $timeLog->started_at ?? '-' }}

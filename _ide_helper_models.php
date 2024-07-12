@@ -13,6 +13,28 @@
 namespace App\Models{
     /**
      * @property int $id
+     * @property string $name
+     * @property string|null $color
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TimeLog> $users
+     * @property-read int|null $users_count
+     *
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag newModelQuery()
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag newQuery()
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag query()
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag whereColor($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag whereName($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Tag whereUpdatedAt($value)
+     */
+    class Tag extends \Eloquent {}
+}
+
+namespace App\Models{
+    /**
+     * @property int $id
      * @property int $user_id
      * @property string|null $title
      * @property string|null $description
@@ -22,6 +44,8 @@ namespace App\Models{
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $deleted_at
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
+     * @property-read int|null $tags_count
      * @property-read \App\Models\User $user
      *
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog newModelQuery()

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Illuminate\Support\Carbon;
 use App\Models\{TimeLog, User};
 
@@ -43,6 +44,12 @@ class Dashboard extends Component
         $this->redirect('/dashboard', true);
     }
 
+    #[On('timer-stopped')]
+    public function timerStopped()
+    {
+        $this->activeTimeLog = null;
+    }
+
     public function stopTimer()
     {
         $this->stopLogTimer($this->activeTimeLog);
@@ -56,8 +63,7 @@ class Dashboard extends Component
     private function stopLogTimer(TimeLog $timeLog)
     {
         $timeLog->ended_at = new Carbon();
-        $duration = $timeLog->started_at->diffInSeconds($timeLog->ended_at);
-        $timeLog->duration = $duration;
+        $timeLog->duration = $timeLog->calculateDuration($timeLog->started_at, $timeLog->ended_at);
         $timeLog->save();
 
         return $timeLog;

@@ -18,7 +18,7 @@ class TimeLogList extends Component
         /** @var User $user */
         $user = auth()->user();
 
-        $userTimeLogs = $user->timeLogs()->latest()->paginate(10);
+        $userTimeLogs = $user->timeLogs()->latest()->with('tags')->paginate(10);
 
         return view('livewire.time-log-list', [
             'timeLogs' => $userTimeLogs,
@@ -27,6 +27,7 @@ class TimeLogList extends Component
 
     public function stopTimer(TimeLog $timeLog)
     {
+        $this->dispatch('timer-stopped')->to(Dashboard::class);
         if ($timeLog->ended_at) {
             return;
         }

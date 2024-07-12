@@ -1,20 +1,20 @@
 <x-modal name="EditLogModal" :show="true">
-    <form wire:submit="handleSubmit">
+    <form wire:submit="handleSubmit" x-on:click.away="$wire.$dispatchTo('time-log-list','close-log-edit')">
         <!-- Modal body -->
         <div class="p-4 md:p-5 space-y-4">
             <div class="mb-5">
-                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Log
-                    Title</label>
+                <x-input-label for="title" class="mb-2">Title</x-input-label>
                 <x-text-input wire:model="form.title" type="text" id="title" class="w-full"
+                    name="title"
                     placeholder="Write log title here..." required />
                 <div>
                     @error('form.title') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="mb-5">
-                <label for="description"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                <x-input-label for="description" class="mb-2">Description</x-input-label>
                 <textarea wire:model="form.description" id="description"
+                    name="description"
                     class='w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm'
                     placeholder="Write log description here..."></textarea>
                 <div>
@@ -22,9 +22,18 @@
                 </div>
             </div>
             <div class="mb-5">
-                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Log
-                    Started At</label>
-                <x-text-input disabled type="text" id="started_at" class="w-full opacity-75 cursor-not-allowed" required :value="$form->started_at"/>
+                <x-input-label for="started_at" class="mb-2">Started At</x-input-label>
+                <x-text-input wire:model="form.started_at" name="started_at" type="datetime-local" id="started_at" class="w-full dark" :value="$form->started_at" step="1" />
+                <div>
+                    @error('form.started_at') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                </div>
+            </div>
+            <div class="mb-5">
+                <x-input-label for="ended_At" class="mb-2">Ended At</x-input-label>
+                <x-text-input wire:model="form.ended_at" name="ended_at" type="datetime-local" id="ended_at" class="w-full dark" :value="$form->ended_at" step="1" />
+                <div>
+                    @error('form.ended_at') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                </div>
             </div>
         </div>
         <!-- Modal footer -->

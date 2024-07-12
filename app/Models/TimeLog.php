@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TimeLog extends Model
 {
@@ -30,5 +31,26 @@ class TimeLog extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public static function calculateDuration(Carbon|string $startedAt, Carbon|string $endedAt): float
+    {
+        $s = $startedAt;
+        $e = $endedAt;
+
+        if (! ($s instanceof Carbon)) {
+            $s = Carbon::parse($s);
+        }
+
+        if (! ($e instanceof Carbon)) {
+            $e = Carbon::parse($e);
+        }
+
+        return $s->diffInSeconds($e);
     }
 }

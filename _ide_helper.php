@@ -28568,3 +28568,9 @@ namespace {
     class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
     class Livewire extends \Livewire\Livewire {}
 }
+
+namespace Facades\Livewire\Features\SupportFileUploads {
+    /**
+     * @mixin \Livewire\Features\SupportFileUploads\GenerateSignedUploadUrl     */
+    class GenerateSignedUploadUrl extends \Livewire\Features\SupportFileUploads\GenerateSignedUploadUrl {}
+}
