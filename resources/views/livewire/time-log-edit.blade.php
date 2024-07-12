@@ -28,13 +28,15 @@
                     @error('form.started_at') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                 </div>
             </div>
-            <div class="mb-5">
-                <x-input-label for="ended_At" class="mb-2">Ended At</x-input-label>
-                <x-text-input wire:model="form.ended_at" name="ended_at" type="datetime-local" id="ended_at" class="w-full dark" :value="$form->ended_at" step="1" />
-                <div>
-                    @error('form.ended_at') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+            @isset($form->ended_at)
+                <div class="mb-5">
+                    <x-input-label for="ended_At" class="mb-2">Ended At</x-input-label>
+                    <x-text-input wire:model="form.ended_at" name="ended_at" type="datetime-local" id="ended_at" class="w-full dark" :value="$form->ended_at" step="1" />
+                    <div>
+                        @error('form.ended_at') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                    </div>
                 </div>
-            </div>
+            @endisset
         </div>
         <!-- Modal footer -->
         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">

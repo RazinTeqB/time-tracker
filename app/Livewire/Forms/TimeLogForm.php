@@ -17,10 +17,10 @@ class TimeLogForm extends Form
     public ?string $description;
 
     #[Validate(rule: 'required|date')]
-    public ?string $started_at;
+    public string $started_at;
 
-    #[Validate(rule: 'nullable|required|date|after:started_at')]
-    public ?string $ended_at;
+    #[Validate(rule: 'sometimes|nullable|date|after:started_at')]
+    public ?string $ended_at = null;
 
     /**
      * @var Tag[] $tags
