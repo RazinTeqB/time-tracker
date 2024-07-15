@@ -3,7 +3,7 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Form;
-use App\Models\{Tag, TimeLog};
+use App\Models\{TimeLog};
 use Livewire\Attributes\{Locked, Validate};
 
 class TimeLogForm extends Form
@@ -23,10 +23,9 @@ class TimeLogForm extends Form
     public ?string $ended_at = null;
 
     /**
-     * @var Tag[] $tags
+     * @var array<int>
      */
-    #[Locked]
-    public ?array $tags = [];
+    public array $tags = [];
 
     public function setTimeLog(TimeLog $timeLog)
     {
@@ -35,8 +34,6 @@ class TimeLogForm extends Form
         $this->description = $timeLog->description;
         $this->started_at = $timeLog->started_at;
         $this->ended_at = $timeLog->ended_at;
-
-        $tags = Tag::all()->toArray();
-        $this->tags = count($tags) > 0 ? $tags : [];
+        $this->tags = $timeLog->tags->pluck('id')->toArray();
     }
 }

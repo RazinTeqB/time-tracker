@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\TimeLog;
 use Livewire\Component;
 use Illuminate\Support\Arr;
+use App\Models\{Tag, TimeLog};
 use App\Livewire\Forms\TimeLogForm;
 
 class TimeLogEdit extends Component
@@ -29,9 +29,25 @@ class TimeLogEdit extends Component
         if ($this->form->started_at && $this->form->ended_at) {
             $data['duration'] = TimeLog::calculateDuration($this->form->started_at, $this->form->ended_at);
         }
+        /** @var TimeLog */
         $timeLog = TimeLog::find($data['id']);
-        $timeLog->update(Arr::except($data, 'id'));
+        $timeLog->update(Arr::except($data, ['id', 'tags']));
+        $tagIds = Arr::only($data, 'tags');
+        $tags = [];
+        if ($tagIds && count($tagIds) > 0) {
+            $tags = Tag::query()->find($tagIds);
+        }
+        $timeLog->tags()->sync($tags);
 
         $this->dispatch('close-log-edit')->to(TimeLogList::class);
+    }
+
+    public function updateSelectedTag($selected)
+    {
+        if ($selected || is_countable($selected)) {
+            $this->form->tags = $selected;
+        } else {
+            $this->form->tags = [];
+        }
     }
 }

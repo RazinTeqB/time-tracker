@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[x-cloak] {
+    @apply !hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+    @apply w-[7px];
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    @apply rounded-[5px] bg-zinc-100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    @apply bg-zinc-500 rounded-[5px];
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-600;
+}

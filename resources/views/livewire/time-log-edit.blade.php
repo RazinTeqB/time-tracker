@@ -1,5 +1,5 @@
-<x-modal name="EditLogModal" :show="true">
-    <form wire:submit="handleSubmit" x-on:click.away="$wire.$dispatchTo('time-log-list','close-log-edit')">
+<x-modal name="EditLogModal" :show="true" slotWrapperClass="!overflow-visible">
+    <form wire:submit="handleSubmit">
         <!-- Modal body -->
         <div class="p-4 md:p-5 space-y-4">
             <div class="mb-5">
@@ -23,7 +23,7 @@
             </div>
             <div class="mb-5">
                 <x-input-label for="started_at" class="mb-2">Started At</x-input-label>
-                <x-text-input wire:model="form.started_at" name="started_at" type="datetime-local" id="started_at" class="w-full dark" :value="$form->started_at" step="1" />
+                <x-text-input wire:model="form.started_at" name="started_at" type="datetime-local" id="started_at" class="w-full" :value="$form->started_at" step="1" />
                 <div>
                     @error('form.started_at') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                 </div>
@@ -31,12 +31,15 @@
             @isset($form->ended_at)
                 <div class="mb-5">
                     <x-input-label for="ended_At" class="mb-2">Ended At</x-input-label>
-                    <x-text-input wire:model="form.ended_at" name="ended_at" type="datetime-local" id="ended_at" class="w-full dark" :value="$form->ended_at" step="1" />
+                    <x-text-input wire:model="form.ended_at" name="ended_at" type="datetime-local" id="ended_at" class="w-full" :value="$form->ended_at" step="1" />
                     <div>
                         @error('form.ended_at') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
                 </div>
             @endisset
+            <livewire:tag-input class="border border-green-600" :defaultValue="$form->tags"
+                @tag-update.window="updateSelectedTag($event.detail)"
+            />
         </div>
         <!-- Modal footer -->
         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
