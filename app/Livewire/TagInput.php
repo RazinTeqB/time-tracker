@@ -7,6 +7,9 @@ use App\DTO\TagDtoData;
 use Livewire\Component;
 use Illuminate\Support\Collection;
 
+/**
+ * @deprecated - In favor of TagInputNew
+ */
 class TagInput extends Component
 {
     /**

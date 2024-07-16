@@ -22,7 +22,7 @@
         </div>
     </template>
 
-    <div class="dark:bg-dark-600 dark:border-0 absolute left-0 top-full max-w-[60%] rounded border border-gray-200 bg-white px-3 py-4 shadow"
+    <div class="dark:bg-dark-600 dark:border-0 absolute left-0 top-full z-50 max-w-[60%] rounded border border-gray-200 bg-white px-3 py-4 shadow"
         x-cloak x-show="showDialog === true" x-transition x-on:click.outside="showDialog = false">
         <div class="relative">
             <x-text-input class="w-full !rounded-full px-2 py-1 pl-8 text-sm" id="search" name="title"

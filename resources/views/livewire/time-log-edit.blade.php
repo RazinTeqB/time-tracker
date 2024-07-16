@@ -37,6 +37,11 @@
                     </div>
                 </div>
             @endisset
+            {{-- <livewire:tag-input
+                class="border border-green-600"
+                :defaultValue="$form->tags"
+                @selected-tag-update.window="form.tags = $event.detail"
+            /> --}}
             <livewire:tag-input-new
                 class="border border-green-600"
                 :defaultValue="$form->tags"

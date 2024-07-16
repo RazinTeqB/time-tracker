@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <div class="dark:bg-dark-600 dark:border-0 absolute left-0 top-full max-w-[60%] rounded border border-gray-200 bg-white px-3 py-4 shadow"
+    <div class="dark:bg-dark-600 dark:border-0 absolute left-0 top-full max-w-[60%] rounded border border-gray-200 bg-white px-3 py-4 shadow z-50"
         x-cloak x-show="showDialog === true" x-transition
         x-on:click.outside="showDialog = false"
     >
