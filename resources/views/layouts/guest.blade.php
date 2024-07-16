@@ -7,6 +7,23 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <script>
+            (function() {
+                const theme = sessionStorage.getItem('theme') || 'system';
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                if (theme === 'dark' || (theme === 'system' && prefersDark)) {
+                    document.documentElement.style.colorScheme = 'dark';
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                } else {
+                    document.documentElement.style.colorScheme = 'light';
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                }
+            })();
+        </script>
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

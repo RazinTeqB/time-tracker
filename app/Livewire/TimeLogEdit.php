@@ -41,13 +41,4 @@ class TimeLogEdit extends Component
 
         $this->dispatch('close-log-edit')->to(TimeLogList::class);
     }
-
-    public function updateSelectedTag($selected)
-    {
-        if ($selected || is_countable($selected)) {
-            $this->form->tags = $selected;
-        } else {
-            $this->form->tags = [];
-        }
-    }
 }
