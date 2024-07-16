@@ -22,7 +22,7 @@
         <tbody>
             @foreach ($timeLogs as $timeLog)
                 <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 @if (!$timeLog->duration) border-black border-bottom dark:border-white @endif"
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 @if (!$timeLog->duration) border-black border-bottom dark:!border-white @endif"
                 >
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $timeLog->title ?? '-' }}
@@ -35,7 +35,9 @@
                                     <span
                                         class="inline-block mt-2 bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
                                         style="@if($tag->color) background-color: {{$tag->color}} !important; @endif"
-                                    >{{ $tag->name }}</span>
+                                    >
+                                    <span class="mix-blend-color-burn dark:mix-blend-color-dodge">{{ $tag->name }}</span>
+                                    </span>
                                 @endforeach
                             </div>
                         @endif

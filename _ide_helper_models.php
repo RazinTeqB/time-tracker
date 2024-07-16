@@ -20,6 +20,7 @@ namespace App\Models{
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TimeLog> $users
      * @property-read int|null $users_count
      *
+     * @method static \Database\Factories\TagFactory factory($count = null, $state = [])
      * @method static \Illuminate\Database\Eloquent\Builder|Tag newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Tag newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Tag query()
