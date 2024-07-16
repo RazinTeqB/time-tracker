@@ -1,8 +1,8 @@
 <div class="{{ collect([$htmlAttributes->get('class'), 'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full py-2 px-3 relative'])->filter()->implode(' ') }}"
     x-on:selected-tag-update="$dispatch('input', $event.detail)" x-data="initData">
     <template x-if="!selectedTags || selectedTags.length == 0">
-        <div class="flex items-center gap-2" x-on:click="showDialog = !showDialog">
-            <x-phosphor-plus class="w-5 cursor-pointer" />
+        <div class="flex cursor-pointer items-center gap-2" x-on:click="showDialog = !showDialog">
+            <x-phosphor-plus class="w-5" />
             <span>{{ $htmlAttributes->get('label') ?? 'Add Tag' }}</span>
         </div>
     </template>
@@ -13,10 +13,12 @@
                 x-on:click="showDialog = !showDialog" />
             <div class="mt-1 flex max-h-16 flex-wrap gap-x-1 gap-y-3 overflow-y-auto">
                 <template x-for="(sTag, index) in selectedTags" :key="sTag.id">
-                    <span
-                        class="dark:bg-blue-900 dark:text-blue-300 me-2 inline-block cursor-pointer rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
-                        role="button" :style="sTag.color ? `background-color: ${sTag.color} !important;` : ''"
-                        x-on:click="toggleTag(sTag.id)" x-text="sTag.name"></span>
+                    <div class="dark:bg-blue-900 dark:text-blue-300 group me-2 flex items-center gap-1 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
+                        :style="sTag.color ? `background-color: ${sTag.color} !important;` : ''">
+                        <span x-text="sTag.name"></span>
+                        <x-phosphor-x class="hidden w-3 cursor-pointer group-hover:block" role="button"
+                            x-on:click="toggleTag(sTag.id)" />
+                    </div>
                 </template>
             </div>
         </div>
@@ -39,10 +41,12 @@
                 </div>
                 <div class="mt-1 flex max-h-40 flex-wrap gap-x-1 gap-y-3 overflow-y-auto">
                     <template x-for="(sTag, index) in selectedTags" :key="sTag.id">
-                        <span
-                            class="dark:bg-blue-900 dark:text-blue-300 me-2 inline-block cursor-pointer rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
-                            role="button" :style="sTag.color ? `background-color: ${sTag.color} !important;` : ''"
-                            x-on:click="toggleTag(sTag.id)" x-text="sTag.name"></span>
+                        <div class="dark:bg-blue-900 dark:text-blue-300 me-2 flex items-center gap-1 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
+                            :style="sTag.color ? `background-color: ${sTag.color} !important;` : ''">
+                            <span x-text="sTag.name"></span>
+                            <x-phosphor-x class="w-3 cursor-pointer" role="button"
+                                x-on:click="toggleTag(sTag.id)" />
+                        </div>
                     </template>
                 </div>
             </div>
