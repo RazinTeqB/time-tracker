@@ -37,8 +37,10 @@
                     </div>
                 </div>
             @endisset
-            <livewire:tag-input class="border border-green-600" :defaultValue="$form->tags"
-                @tag-update.window="updateSelectedTag($event.detail)"
+            <livewire:tag-input-new
+                class="border border-green-600"
+                :defaultValue="$form->tags"
+                @input.window="form.tags = $event.detail"
             />
         </div>
         <!-- Modal footer -->
