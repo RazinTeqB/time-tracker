@@ -9,6 +9,27 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Table: users
+ *
+ * === Columns ===
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property Carbon\Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property Carbon\Carbon|null $created_at
+ * @property Carbon\Carbon|null $updated_at
+ *
+ * === Relationships ===
+ * @property-read TimeLog|null $timeLogs
+ * @property-read DatabaseNotification|null $notifications
+ *
+ * === Accessors/Attributes ===
+ * @property-read mixed $activeTimeLog
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;

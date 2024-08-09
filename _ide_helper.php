@@ -6,7 +6,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 11.15.0.
+ * Generated for Laravel 11.20.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -4519,11 +4519,23 @@ namespace Illuminate\Support\Facades {
             /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
             return $instance->serializeAndRestore($serializeAndRestore);
         }
+
+        /**
+         * Get the batches that have been dispatched.
+         *
+         * @return array
+         *
+         * @static
+         */
+        public static function dispatchedBatches()
+        {
+            /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+            return $instance->dispatchedBatches();
+        }
     }
     /**
      * @see \Illuminate\Cache\CacheManager
-     *
-     * @mixin \Illuminate\Cache\Repository
+     * @see \Illuminate\Cache\Repository
      */ class Cache
     {
         /**
@@ -5951,6 +5963,42 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
+         * Determine if the given value is in the given stack.
+         *
+         * @param  string  $key
+         * @param  mixed  $value
+         * @param  bool  $strict
+         * @return bool
+         *
+         * @throws \RuntimeException
+         *
+         * @static
+         */
+        public static function stackContains($key, $value, $strict = false)
+        {
+            /** @var \Illuminate\Log\Context\Repository $instance */
+            return $instance->stackContains($key, $value, $strict);
+        }
+
+        /**
+         * Determine if the given value is in the given hidden stack.
+         *
+         * @param  string  $key
+         * @param  mixed  $value
+         * @param  bool  $strict
+         * @return bool
+         *
+         * @throws \RuntimeException
+         *
+         * @static
+         */
+        public static function hiddenStackContains($key, $value, $strict = false)
+        {
+            /** @var \Illuminate\Log\Context\Repository $instance */
+            return $instance->hiddenStackContains($key, $value, $strict);
+        }
+
+        /**
          * Determine if the repository is empty.
          *
          * @return bool
@@ -6986,6 +7034,48 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
+         * Get a human-readable name for the given connection driver.
+         *
+         * @return string
+         *
+         * @static
+         */
+        public static function getDriverTitle()
+        {
+            /** @var \Illuminate\Database\MySqlConnection $instance */
+            return $instance->getDriverTitle();
+        }
+
+        /**
+         * Run an insert statement against the database.
+         *
+         * @param  string  $query
+         * @param  array  $bindings
+         * @param  string|null  $sequence
+         * @return bool
+         *
+         * @static
+         */
+        public static function insert($query, $bindings = [], $sequence = null)
+        {
+            /** @var \Illuminate\Database\MySqlConnection $instance */
+            return $instance->insert($query, $bindings, $sequence);
+        }
+
+        /**
+         * Get the connection's last insert ID.
+         *
+         * @return string|int|null
+         *
+         * @static
+         */
+        public static function getLastInsertId()
+        {
+            /** @var \Illuminate\Database\MySqlConnection $instance */
+            return $instance->getLastInsertId();
+        }
+
+        /**
          * Determine if the connected database is a MariaDB database.
          *
          * @return bool
@@ -7204,21 +7294,6 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Run an insert statement against the database.
-         *
-         * @param  string  $query
-         * @param  array  $bindings
-         * @return bool
-         *
-         * @static
-         */
-        public static function insert($query, $bindings = [])
-        {            //Method inherited from \Illuminate\Database\Connection
-            /** @var \Illuminate\Database\MySqlConnection $instance */
-            return $instance->insert($query, $bindings);
-        }
-
-        /**
          * Run an update statement against the database.
          *
          * @param  string  $query
@@ -7290,6 +7365,19 @@ namespace Illuminate\Support\Facades {
         {            //Method inherited from \Illuminate\Database\Connection
             /** @var \Illuminate\Database\MySqlConnection $instance */
             return $instance->unprepared($query);
+        }
+
+        /**
+         * Get the number of open connections for the database.
+         *
+         * @return int|null
+         *
+         * @static
+         */
+        public static function threadCount()
+        {            //Method inherited from \Illuminate\Database\Connection
+            /** @var \Illuminate\Database\MySqlConnection $instance */
+            return $instance->threadCount();
         }
 
         /**
@@ -9889,6 +9977,22 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
+         * Verifies that the configuration is less than or equal to what is configured.
+         *
+         * @param  array  $value
+         * @return bool
+         *
+         * @internal
+         *
+         * @static
+         */
+        public static function verifyConfiguration($value)
+        {
+            /** @var \Illuminate\Hashing\HashManager $instance */
+            return $instance->verifyConfiguration($value);
+        }
+
+        /**
          * Get a driver instance.
          *
          * @param  string|null  $driver
@@ -11336,7 +11440,7 @@ namespace Illuminate\Support\Facades {
          * Assert if a mailable was sent based on a truth-test callback.
          *
          * @param  string|\Closure  $mailable
-         * @param  callable|int|null  $callback
+         * @param  callable|array|string|int|null  $callback
          * @return void
          *
          * @static
@@ -11366,7 +11470,7 @@ namespace Illuminate\Support\Facades {
          * Determine if a mailable was not sent based on a truth-test callback.
          *
          * @param  string|\Closure  $mailable
-         * @param  callable|null  $callback
+         * @param  callable|array|string|null  $callback
          * @return void
          *
          * @static
@@ -11407,7 +11511,7 @@ namespace Illuminate\Support\Facades {
          * Assert if a mailable was queued based on a truth-test callback.
          *
          * @param  string|\Closure  $mailable
-         * @param  callable|int|null  $callback
+         * @param  callable|array|string|int|null  $callback
          * @return void
          *
          * @static
@@ -11422,7 +11526,7 @@ namespace Illuminate\Support\Facades {
          * Determine if a mailable was not queued based on a truth-test callback.
          *
          * @param  string|\Closure  $mailable
-         * @param  callable|null  $callback
+         * @param  callable|array|string|null  $callback
          * @return void
          *
          * @static
@@ -22718,7 +22822,7 @@ namespace Illuminate\Support\Facades {
          * @param  string|null  $buildDirectory
          * @return string
          *
-         * @throws \Exception
+         * @throws \Illuminate\Foundation\ViteException
          *
          * @static
          */
@@ -24645,7 +24749,7 @@ namespace {
          *
          * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
          * @param  string|null  $key
-         * @return \Illuminate\Support\Collection<int|string, mixed>
+         * @return \Illuminate\Support\Collection<array-key, mixed>
          *
          * @static
          */
@@ -26379,6 +26483,73 @@ namespace {
         }
 
         /**
+         * Add a "where like" clause to the query.
+         *
+         * @param  \Illuminate\Contracts\Database\Query\Expression|string  $column
+         * @param  string  $value
+         * @param  bool  $caseSensitive
+         * @param  string  $boolean
+         * @param  bool  $not
+         * @return \Illuminate\Database\Query\Builder
+         *
+         * @static
+         */
+        public static function whereLike($column, $value, $caseSensitive = false, $boolean = 'and', $not = false)
+        {
+            /** @var \Illuminate\Database\Query\Builder $instance */
+            return $instance->whereLike($column, $value, $caseSensitive, $boolean, $not);
+        }
+
+        /**
+         * Add an "or where like" clause to the query.
+         *
+         * @param  \Illuminate\Contracts\Database\Query\Expression|string  $column
+         * @param  string  $value
+         * @param  bool  $caseSensitive
+         * @return \Illuminate\Database\Query\Builder
+         *
+         * @static
+         */
+        public static function orWhereLike($column, $value, $caseSensitive = false)
+        {
+            /** @var \Illuminate\Database\Query\Builder $instance */
+            return $instance->orWhereLike($column, $value, $caseSensitive);
+        }
+
+        /**
+         * Add a "where not like" clause to the query.
+         *
+         * @param  \Illuminate\Contracts\Database\Query\Expression|string  $column
+         * @param  string  $value
+         * @param  bool  $caseSensitive
+         * @param  string  $boolean
+         * @return \Illuminate\Database\Query\Builder
+         *
+         * @static
+         */
+        public static function whereNotLike($column, $value, $caseSensitive = false, $boolean = 'and')
+        {
+            /** @var \Illuminate\Database\Query\Builder $instance */
+            return $instance->whereNotLike($column, $value, $caseSensitive, $boolean);
+        }
+
+        /**
+         * Add an "or where not like" clause to the query.
+         *
+         * @param  \Illuminate\Contracts\Database\Query\Expression|string  $column
+         * @param  string  $value
+         * @param  bool  $caseSensitive
+         * @return \Illuminate\Database\Query\Builder
+         *
+         * @static
+         */
+        public static function orWhereNotLike($column, $value, $caseSensitive = false)
+        {
+            /** @var \Illuminate\Database\Query\Builder $instance */
+            return $instance->orWhereNotLike($column, $value, $caseSensitive);
+        }
+
+        /**
          * Add a "where in" clause to the query.
          *
          * @param  \Illuminate\Contracts\Database\Query\Expression|string  $column
@@ -27275,7 +27446,7 @@ namespace {
         /**
          * Add a "where" clause to the query for multiple columns with "and" conditions between them.
          *
-         * @param  string[]  $columns
+         * @param  \Illuminate\Contracts\Database\Query\Expression[]|string[]  $columns
          * @param  mixed  $operator
          * @param  mixed  $value
          * @param  string  $boolean
@@ -27292,8 +27463,8 @@ namespace {
         /**
          * Add an "or where" clause to the query for multiple columns with "and" conditions between them.
          *
-         * @param  string[]  $columns
-         * @param  string  $operator
+         * @param  \Illuminate\Contracts\Database\Query\Expression[]|string[]  $columns
+         * @param  mixed  $operator
          * @param  mixed  $value
          * @return \Illuminate\Database\Query\Builder
          *
@@ -27306,10 +27477,10 @@ namespace {
         }
 
         /**
-         * Add an "where" clause to the query for multiple columns with "or" conditions between them.
+         * Add a "where" clause to the query for multiple columns with "or" conditions between them.
          *
-         * @param  string[]  $columns
-         * @param  string  $operator
+         * @param  \Illuminate\Contracts\Database\Query\Expression[]|string[]  $columns
+         * @param  mixed  $operator
          * @param  mixed  $value
          * @param  string  $boolean
          * @return \Illuminate\Database\Query\Builder
@@ -27325,8 +27496,8 @@ namespace {
         /**
          * Add an "or where" clause to the query for multiple columns with "or" conditions between them.
          *
-         * @param  string[]  $columns
-         * @param  string  $operator
+         * @param  \Illuminate\Contracts\Database\Query\Expression[]|string[]  $columns
+         * @param  mixed  $operator
          * @param  mixed  $value
          * @return \Illuminate\Database\Query\Builder
          *
@@ -27336,6 +27507,39 @@ namespace {
         {
             /** @var \Illuminate\Database\Query\Builder $instance */
             return $instance->orWhereAny($columns, $operator, $value);
+        }
+
+        /**
+         * Add a "where not" clause to the query for multiple columns where none of the conditions should be true.
+         *
+         * @param  \Illuminate\Contracts\Database\Query\Expression[]|string[]  $columns
+         * @param  mixed  $operator
+         * @param  mixed  $value
+         * @param  string  $boolean
+         * @return \Illuminate\Database\Query\Builder
+         *
+         * @static
+         */
+        public static function whereNone($columns, $operator = null, $value = null, $boolean = 'and')
+        {
+            /** @var \Illuminate\Database\Query\Builder $instance */
+            return $instance->whereNone($columns, $operator, $value, $boolean);
+        }
+
+        /**
+         * Add an "or where not" clause to the query for multiple columns where none of the conditions should be true.
+         *
+         * @param  \Illuminate\Contracts\Database\Query\Expression[]|string[]  $columns
+         * @param  mixed  $operator
+         * @param  mixed  $value
+         * @return \Illuminate\Database\Query\Builder
+         *
+         * @static
+         */
+        public static function orWhereNone($columns, $operator = null, $value = null)
+        {
+            /** @var \Illuminate\Database\Query\Builder $instance */
+            return $instance->orWhereNone($columns, $operator, $value);
         }
 
         /**

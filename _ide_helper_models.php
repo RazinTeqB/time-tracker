@@ -12,12 +12,50 @@
 
 namespace App\Models{
     /**
+     * Table: projects
+     *
+     * === Columns ===
+     *
+     * @property int $id
+     * @property string $name
+     * @property Carbon\Carbon|null $deleted_at
+     * @property Carbon\Carbon|null $created_at
+     * @property Carbon\Carbon|null $updated_at
+     *
+     * === Relationships ===
+     * @property-read TimeLog[]|\Illuminate\Database\Eloquent\Collection $timeLogs
+     * @property-read int|null $time_logs_count
+     *
+     * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
+     * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
+     * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+     * @method static \Illuminate\Database\Eloquent\Builder|Project onlyTrashed()
+     * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+     * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Project whereDeletedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Project whereName($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Project withTrashed()
+     * @method static \Illuminate\Database\Eloquent\Builder|Project withoutTrashed()
+     */
+    class Project extends \Eloquent {}
+}
+
+namespace App\Models{
+    /**
+     * Table: tags
+     *
+     * === Columns ===
+     *
      * @property int $id
      * @property string $name
      * @property string|null $color
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TimeLog> $users
+     * @property Carbon\Carbon|null $created_at
+     * @property Carbon\Carbon|null $updated_at
+     *
+     * === Relationships ===
+     * @property-read TimeLog[]|\Illuminate\Database\Eloquent\Collection $users
      * @property-read int|null $users_count
      *
      * @method static \Database\Factories\TagFactory factory($count = null, $state = [])
@@ -35,19 +73,27 @@ namespace App\Models{
 
 namespace App\Models{
     /**
+     * Table: time_logs
+     *
+     * === Columns ===
+     *
      * @property int $id
      * @property int $user_id
      * @property string|null $title
      * @property string|null $description
-     * @property \Illuminate\Support\Carbon|null $started_at
-     * @property \Illuminate\Support\Carbon|null $ended_at
-     * @property int|null $duration Elapsed duration in seconds
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $deleted_at
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
+     * @property Carbon\Carbon|null $started_at
+     * @property Carbon\Carbon|null $ended_at
+     * @property int|null $duration
+     * @property Carbon\Carbon|null $created_at
+     * @property Carbon\Carbon|null $updated_at
+     * @property Carbon\Carbon|null $deleted_at
+     * @property int|null $project_id
+     *
+     * === Relationships ===
+     * @property-read User|null $user
+     * @property-read Tag[]|\Illuminate\Database\Eloquent\Collection $tags
+     * @property-read Project|null $project
      * @property-read int|null $tags_count
-     * @property-read \App\Models\User $user
      *
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog newQuery()
@@ -59,6 +105,7 @@ namespace App\Models{
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog whereDuration($value)
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog whereEndedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|TimeLog whereProjectId($value)
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog whereStartedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog whereTitle($value)
      * @method static \Illuminate\Database\Eloquent\Builder|TimeLog whereUpdatedAt($value)
@@ -71,18 +118,27 @@ namespace App\Models{
 
 namespace App\Models{
     /**
+     * Table: users
+     *
+     * === Columns ===
+     *
      * @property int $id
      * @property string $name
      * @property string $email
-     * @property \Illuminate\Support\Carbon|null $email_verified_at
-     * @property mixed $password
+     * @property Carbon\Carbon|null $email_verified_at
+     * @property string $password
      * @property string|null $remember_token
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property Carbon\Carbon|null $created_at
+     * @property Carbon\Carbon|null $updated_at
+     *
+     * === Relationships ===
+     * @property-read TimeLog|null $timeLogs
+     * @property-read DatabaseNotification|null $notifications
+     *
+     * === Accessors/Attributes ===
+     * @property-read mixed $activeTimeLog
      * @property-read mixed $active_time_log
-     * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
      * @property-read int|null $notifications_count
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TimeLog> $timeLogs
      * @property-read int|null $time_logs_count
      *
      * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
